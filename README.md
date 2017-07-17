@@ -14,3 +14,8 @@ $ nasm -f elf64 <program>.s -o <program>.o
 ```
 $ ld <program>.o -o <program>
 ```
+
+ - Run with:
+```
+$ ./<program>
+```

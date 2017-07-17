@@ -20,6 +20,10 @@
 section .data
   msg_missArg db 0xa,"[!] usage: ./socket <SERVER-IP> <PORT>",0xa,"[*] example: ./socket 192.168.1.5 4444",0xa,0xa
   len_missArg equ $-msg_missArg
+  msg_success db 0xa,"[+] Success, a connection has been established",0xa,0xa
+  len_success equ $-msg_success
+  msg_error db 0xa,"[-] Error, a connection can't be established",0xa,0xa
+  len_error equ $-msg_error
 
 section .bss
   s resb 8
@@ -145,10 +149,23 @@ section .text
         mov rdi, rax
         mov rax, 42 ; sys_connect
         syscall
-	mov rax, 0
-	pop rbp
-	ret
-
+	cmp rax, 0
+	jne error
+	je success
+    error:
+	mov rax, 1
+	xor rdi, rdi
+	mov rsi, msg_error
+	mov rdx, len_error
+	syscall
+	call exit
+    success:
+	mov rax, 1
+	xor rdi, rdi
+	mov rsi, msg_success
+	mov rdx, len_success
+	syscall
+	call exit
     exit:
 	mov    rax, 60
 	mov    rdi, 0
