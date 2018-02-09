@@ -49,19 +49,19 @@ section .text
 
 	;split the IP into 4 Octets
 	pop rdx
-	call atoi ; ascii2string
+	call atoi ; ascii2int
 	xor rdx, rdx
 	mov [OCTET_1], rax
 	pop rdx
-	call atoi ; ascii2string
+	call atoi ; ascii2int
 	xor rdx, rdx
 	mov [OCTET_2], rax
 	pop rdx
-	call atoi ; ascii2string
+	call atoi ; ascii2int
 	xor rdx, rdx
 	mov [OCTET_3], rax
 	pop rdx
-	call atoi ; ascii2string
+	call atoi ; ascii2int
 	xor rdx, rdx
 	mov [OCTET_4], rax
 
@@ -80,7 +80,7 @@ section .text
 	;swap port to little endianess and assign to PORT variable
 	pop rdx; port Address
 	bswap rax
-	call atoi ; ascii2string
+	call atoi ; ascii2int
 	xchg ah, al
 	mov [PORT], rax
 
@@ -89,7 +89,7 @@ section .text
 	;exit from 
 	call exit
 
-    ; transform ASCII to STRING
+    ; transform ASCII to INT
     atoi:
 	xor rax, rax
       .top:

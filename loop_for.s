@@ -58,7 +58,7 @@ itoa:                         ;rdi has the integer to transform to ascii
 
 itoa_loop:
     xor rdx,rdx
-    idiv rcx                  ;split integer to hex to prevent (0x39 + 0x1) == 0x40 == ascii ':'
+    idiv rcx                  ;split integer greater than 2bytes to prevent (0x39 + 0x1) == 0x40 == ascii ':'
     add rdx,0x30              ;ascii transformation e.g: (0x1 + 0x30) == 0x31 == ascii '1'
     dec rdi
     mov byte [rdi],dl
