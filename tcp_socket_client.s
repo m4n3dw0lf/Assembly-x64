@@ -39,7 +39,7 @@ section .text
         mov rdi, [socket] ; write destination = socket
         mov rdx, len_request
         mov rsi, request
-	syscall ; sys_write
+        syscall ; sys_write
         mov rax, 0
         mov rdi, [socket] ; read destination = socket
         mov rdx, 14
